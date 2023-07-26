@@ -98,3 +98,53 @@ if __name__ == "__main__":
     # não existir, é gerada a exceção IndexError
     # A linha abaixo irá gerar a exceção IndexError
     # lista[10] = "ABC"
+    
+    
+    # List Comprehension
+    # Basicamente, permite que criemos uma lista preenchida
+    # com itens em uma linha só, a partir de um loop for
+
+    # Maneira tradicional utilizando laço for
+    lista = []
+    for numero in range(1, 11):
+        lista.append(numero * numero)
+
+    print(lista)
+    lista.clear()
+
+    # List comprehension
+    lista = [numero * numero for numero in range(1, 11)]
+    print(lista)
+
+    # Gerar uma lista de números ímpares do 0 ao 100
+    lista = [numero for numero in range(101) if not numero % 2 == 0]
+    print(lista)
+
+    # Cópia de listas
+    cursos = ["Python", "C#", "PHP", "Javascript", "SQL"]
+    cursos_futuros = cursos
+    cursos_futuros.append("Java")
+    cursos_futuros.append("HTML")
+
+    # Nesse caso, como cursos e cursos_futuros fazem referência a mesma posição
+    # de memória onde os valores foram salvos, os valores mostrados na
+    # exibição de cursos serão os mesmos de cursos_futuros
+    print(cursos_futuros)
+    print(cursos)
+
+    cursos_futuros.pop(0)
+    print(cursos)
+    print(cursos_futuros)
+
+    # Para fazer uma cópia de valor, podemos utilizar 2 abordagens:
+
+    # Método copy(): Retorna uma cópia da lista onde esse método foi chamado
+    cursos = cursos_futuros.copy()
+    cursos.remove("HTML")
+    cursos.remove("Java")
+
+    # Podemos utilizar o slice
+    cursos_futuros = cursos[:]
+    cursos_futuros.clear()
+
+    print(cursos, cursos_futuros)
