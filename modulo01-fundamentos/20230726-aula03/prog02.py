@@ -141,3 +141,42 @@ if __name__ == "__main__":
     # .clear(): Limpa o dicionário
     usuario.clear()
     print(usuario)
+
+    # Também podemos usar a técnica que usamos para a criação de listas
+    # (List comprehension). Nesse caso chamamos de dict comprehension
+
+    # Exemplo: Criação de um dicionário onde as chaves são números inteiros,
+    # e os valores associados são o quadrado das chaves. Vamos criar um dicionário
+    # com 200 itens
+
+    # {1: 1, 2: 4, 3: 9, 4: 16 ...}
+    dicionario_numeros = {numero: numero*numero for numero in range(1, 201)}
+    print(dicionario_numeros)
+
+    """
+    O código acima pode ser representado dessa maneira
+    dicionario_numeros = {}
+    for numero in range(1, 201):
+        dicionario_numeros.update({numero: numero*numero})
+
+    print(dicionario_numeros)
+    
+    """
+
+    # Cópia de dicionários
+    # Apresentam o mesmo "problema" que a cópia de listas, ou seja, não é
+    # feita uma cópia do valor, mas sim da referência
+
+    novo_dicionario = dicionario_numeros
+    novo_dicionario.clear()
+
+    print(novo_dicionario)
+    print(dicionario_numeros)
+
+    novo_dicionario.update({"nome": "João", "idade": 40})
+    dicionario2 = novo_dicionario.copy()
+
+    dicionario2["sexo"] = "m"
+
+    print(novo_dicionario)
+    print(dicionario2)
