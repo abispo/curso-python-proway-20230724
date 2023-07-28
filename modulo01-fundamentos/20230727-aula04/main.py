@@ -40,6 +40,23 @@ def calculo_salario(nome, funcao, setor=1):
     else:
         print("Setor desconhecido")
 
+# As funções anteriores não retornam valores quando são chamadas
+# Se quisermos criar uma função que retorna algum valor, precisamos
+# utilizar a palavra reservada return
+def calculo_imc(peso, altura):
+    imc = peso / (altura * altura)
+
+    return imc
+
+# *args é tratado como uma tupla
+def soma_valores_passados(*args):
+    return sum(args)
+
+# **kwargs é tratado como um dicionário
+def mostra_info(**kwargs):
+
+    for key, value in kwargs.items():
+        print(f"Key: {key} | Value: {value}")
 
 if __name__ == "__main__":
     
@@ -74,3 +91,53 @@ if __name__ == "__main__":
     # idade = int(input("Informe a sua idade: "))
 
     verifica_idade(idade=idade, nome=nome)
+
+    # Como o parâmetro setor já possui um valor padrão, não precisamos
+    # passar um valor para ele
+    calculo_salario("Jair", "Eletricista")
+
+    # Podemos passar valores para todos os parâmetros
+    calculo_salario("Luis", "Borracheiro", 2)
+
+    # Se quisermos, podemos chamar uma função informando os valores
+    # via posição e via nome do parâmetro
+    calculo_salario("Márcia", setor=5, funcao="Gerente")
+
+    # A única regra na última chamada, é que somos obrigados a passar
+    # primeiro os valores de maneira posicional, e depois via nome
+    # do parâmetro
+
+    # A chamada a seguir irá gerar uma exceção
+    # calculo_salario(setor=2, "Programador", nome="Alessandro")
+
+    saida = calculo_salario("Tiago", "Gerente", 1)
+    print(saida)
+
+    imc = calculo_imc(80, 1.80)
+    # Se quisermos formatar o valor suprimindo algumas casas decimais
+    # Podemos utilizar a sintaxe especial depois dos dois pontos
+    print(f"IMC: {imc:.2f}")
+
+    # Vamos imaginar o seguinte cenário:
+    # Precisamos criar uma função que receba números como valores,
+    # porém essa quantidade de números pode variar a cada chamama.
+    # Para isso, criamos uma função que recebe uma quantidade
+    # arbitrária de argumentos utilizando asterisco (*)
+
+    soma = soma_valores_passados(3, 6, 2, 3, 8, 9, 4)
+    soma += soma_valores_passados(1, 4, 7, 3)
+    soma += soma_valores_passados(3)
+    soma += soma_valores_passados()
+
+    print(soma)
+
+    # É importante notar que utilizando *args, vamos sempre
+    # passar os valores via posição
+
+    # Se quisermos passar valores via nome de parâmetros, utilizamos
+    # **kwargs (KeyWord args)
+
+    mostra_info(nome="José", idade=30)
+    mostra_info(nome="Maria", cidade="Blumenau", estado="SC")
+    mostra_info(status="Ativo", registro=True)
+    mostra_info()
