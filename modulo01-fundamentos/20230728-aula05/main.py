@@ -50,6 +50,8 @@ def calculo_imc(peso, altura):
 
 # *args é tratado como uma tupla
 def soma_valores_passados(*args):
+    # A função built-in sum() soma os valores de uma
+    # sequência
     return sum(args)
 
 # **kwargs é tratado como um dicionário
@@ -57,6 +59,15 @@ def mostra_info(**kwargs):
 
     for key, value in kwargs.items():
         print(f"Key: {key} | Value: {value}")
+
+# Função recursiva
+def fatorial(numero):
+
+    if numero == 1:
+        return numero
+    else:
+        return numero * fatorial(numero - 1)
+
 
 if __name__ == "__main__":
     
@@ -125,6 +136,7 @@ if __name__ == "__main__":
     # arbitrária de argumentos utilizando asterisco (*)
 
     soma = soma_valores_passados(3, 6, 2, 3, 8, 9, 4)
+    print(soma)
     soma += soma_valores_passados(1, 4, 7, 3)
     soma += soma_valores_passados(3)
     soma += soma_valores_passados()
@@ -141,3 +153,71 @@ if __name__ == "__main__":
     mostra_info(nome="Maria", cidade="Blumenau", estado="SC")
     mostra_info(status="Ativo", registro=True)
     mostra_info()
+
+    # Função recursiva
+    # Função que chama a si mesma
+    # Temos que tomar cuidado, pois há um limite de recursão
+    # que uma vez atingido, irá gerar uma exceção
+
+    # Exemplo: Cálculo de fatorial utilizando um laço while
+    # e depois uma função recursiva
+    # 5!    -> 5 * 4 * 3 * 2 * 1 = 120
+
+    numero = 6
+    contador = numero
+
+    # 6 * 5 * 4 * 3 * 2 * 1 = 720
+
+    while contador > 1:
+
+        numero = numero * (contador - 1)
+        contador = contador - 1
+
+    print(numero)
+
+    # Utilizando uma função recursiva
+
+    print(fatorial(16))
+
+    #########
+    # Funções lambda (ou funções anônimas)
+    # Funções lambda são funções que não possuem um nome
+    # definido. São criadas utilizando a palavra reservada
+    # lambda
+
+    # Exemplo: Atribuindo uma função que retorna o quadrado
+    # de um número a uma variável
+    a = lambda x: x*x
+    print(a(10))
+
+    # Depois de lambda, passamos a lista de argumentos separados
+    # por vírgula
+    # Funções lambda tem a limitação de possuir apenas 1
+    # expressão. No caso acima, a expressão é x*x
+
+    # Segundo exemplo: Uma função lambda que multiplica
+    # um número pelo outro
+    b = lambda x, y: x * y
+    print(b(4, 16))
+
+    # Existem alguns cenários onde vale mais a pena utilizar
+    # uma função anônima do que criar uma normalmente com def.
+    # Quando utilizamos as funções map() ou filter(), pois
+    # essas funções devem receber um argumento do tipo function
+
+    # A função map recebe uma sequência e um argumento do tipo
+    # function. Essa função será aplicada a todos os elementos
+    # dessa sequência
+    lista = [numero for numero in range(101)]
+
+    # Criar uma lista dos quadrados dos número
+    nova_lista = map(lambda x: x*x, lista)
+    # Precisamos converter o resultado para uma lista
+    print(list(nova_lista))
+
+    # filter(): Filtra os elementos de uma lista utilizando uma função
+    # A função deve sempre retornar um valor bool
+    # Criar uma lista de números ímpares de 0 a 100
+    nova_lista = filter(lambda x: x % 2 == 1, lista)
+    print(list(nova_lista))
+    
