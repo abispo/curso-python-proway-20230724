@@ -1,0 +1,11 @@
+nome,sexo,data_de_nascimento,cidade
+Maria,F,19900215,São Paulo
+João,M,19851120,Rio de Janeiro
+Ana,F,19981204,Belo Horizonte
+Pedro,M,19770610,Salvador
+Luciana,F,19930630,Fortaleza
+Carlos,M,19921205,Recife
+Camila,F,19890418,Brasília
+Rafael,M,19950122,Porto Alegre
+Amanda,F,19821012,Curitiba
+Gustavo,M,19901125,Manaus

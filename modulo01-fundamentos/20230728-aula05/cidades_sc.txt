@@ -1,0 +1,47 @@
+cidade,qtd_habitantes
+Timbó,43059
+Palmitos,15935
+Araranguá,70372
+Içara,66480
+Camboriú,65922
+Forquilhinha,25158
+Rio do Sul,68197
+Jaraguá do Sul,178945
+São João Batista,32795
+Capivari de Baixo,31422
+São João do Oeste,4391
+Florianópolis,508826
+São Bento do Sul,86895
+Joinville,597658
+Ibirama,17256
+Navegantes,67136
+Biguaçu,67791
+São Miguel do Oeste,43809
+Palhoça,176611
+Rio Negrinho,42794
+Balneário Camboriú,145863
+Blumenau,361855
+Urussanga,21719
+São José,242927
+Guaramirim,44986
+Concórdia,79598
+Gaspar,68691
+São Francisco do Sul,51361
+Sombrio,28735
+Orleans,22889
+Criciúma,218783
+Cocal do Sul,15421
+Itajaí,213086
+Bom Retiro,5245
+São Miguel do Oeste,43809
+Xanxerê,53918
+Itapema,66823
+São João do Oeste,4391
+Balneário Camboriú,145863
+Porto Belo,26624
+Cocal do Sul,15421
+Tubarão,105544
+Timbó,43059
+Brusque,135727
+Bom Retiro,5245
+Araranguá,70372
