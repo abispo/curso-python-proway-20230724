@@ -25,6 +25,8 @@
 
 1. O arquivo clientes.txt possui uma lista de clientes com algumas informações, como nome, sexo, data de nascimento e idade. Escreva um script que leia esse arquivo e mostre as informações do cliente na tela. Siga o seguinte formato:
 
+```
+
 Informações do cliente Maria:
 Sexo: F
 Data de Nascimento: 19900215 (Tentem formatar no formato dd/mm/yyy)
@@ -35,6 +37,7 @@ Informações do cliente João
 Sexo: M
 Data de Nascimento: 19851120 (Tentem formatar no formato dd/mm/yyy)
 Cidade: Rio de Janeiro
+```
 
 
 2. O arquivo cidades_sc.txt possui a informação da quantidade de habitantes de 50
