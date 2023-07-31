@@ -58,3 +58,13 @@ if __name__ == "__main__":
             "usuario_id": str(randint(10, 1000)),
             "timestamp": str(randint(20230701, 20230731))
         })
+
+        # Criando uma lista de dicionários utilizando list comprehension
+        lista_acessos = [
+        {
+            "id": str(uuid4()),
+            "usuario_id": str(randint(10, 1000)),
+            "timestamp": str(randint(20230701, 20230731))
+        } for _ in range(10) ]
+
+        csv_dict_writer.writerows(lista_acessos)
