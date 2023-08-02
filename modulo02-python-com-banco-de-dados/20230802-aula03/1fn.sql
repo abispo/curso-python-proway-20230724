@@ -107,3 +107,17 @@ INSERT INTO tb_telefones(cliente_id, telefone) VALUES
     (2, "11956283098"),
     (2, "11972633312"),
     (3, "47989878531");
+    
+/*
+Utilizamos os JOINs para consultar dados de tabelas diferentes
+ao mesmo tempo
+*/
+
+INSERT INTO tb_clientes(
+	nome, tipo_logradouro, logradouro, numero, bairro, cidade, estado
+) VALUES
+	("Paulo Souza", "Rua", "XV de Novembro", "1000", "Centro", "Blumenau", "SC");
+
+SELECT a.id, a.nome, a.cidade, a.estado, b.telefone FROM tb_clientes a
+INNER JOIN tb_telefones b
+ON a.id = b.cliente_id;
