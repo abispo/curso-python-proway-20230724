@@ -12,20 +12,20 @@ informações estão organizadas de forma mais estruturada.
 -- tb_controle
 
 CREATE TABLE IF NOT EXISTS tb_controle(
-	id			INTEGER NOT NULL,
-	servico_id	INTEGER NOT NULL,
-	servico		TEXT	NOT NULL,
-	total_horas	INTEGER	NOT NULL,
-	valor_hora	REAL	NOT NULL,
+	id			INTEGER         PRIMARY KEY AUTO_INCREMENT,
+	servico_id	INTEGER         NOT NULL,
+	servico		VARCHAR(100)	NOT NULL,
+	total_horas	INTEGER	        NOT NULL,
+	valor_hora	FLOAT	        NOT NULL,
 	
 	PRIMARY KEY(id, servico_id)
 );
 
 INSERT INTO tb_controle (id, servico_id, servico, total_horas, valor_hora) VALUES
-	(1, 1, "Manutenção de PC", 6, 80),
-	(2, 1, "Manutenção de PC", 10, 80),
-	(3, 2, "Desenvolvimento de Site", 150, 100),
-	(4, 3, "Configuração de Servidor", 30, 250),
-	(5, 4, "Aulas de Programação", 80, 50);
+	(1, "Manutenção de PC", 6, 80),
+	(1, "Manutenção de PC", 10, 80),
+	(2, "Desenvolvimento de Site", 150, 100),
+	(3, "Configuração de Servidor", 30, 250),
+	(4, "Aulas de Programação", 80, 50);
 
 SELECT * FROM tb_controle ;

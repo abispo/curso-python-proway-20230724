@@ -9,7 +9,7 @@ desnecessárias ou irrelevantes, e também ajuda a melhorar a eficiência de con
 CREATE TABLE IF NOT EXISTS tb_pedidos_itens(
 	pedido_id		INTEGER		NOT NULL,
 	item_id			INTEGER		NOT NULL,
-	valor_unitario	REAL		NOT NULL,
+	valor_unitario	FLOAT		NOT NULL,
 	quantidade		INTEGER		NOT NULL,
 	subtotal		REAL		NOT NULL,
 	PRIMARY KEY(pedido_id, item_id)
