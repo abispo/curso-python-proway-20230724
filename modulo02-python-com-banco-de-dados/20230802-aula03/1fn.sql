@@ -79,3 +79,31 @@ CREATE TABLE IF NOT EXISTS tb_clientes(
     cidade VARCHAR(100) NOT NULL,
     estado VARCHAR(50) NOT NULL
 );
+
+INSERT INTO tb_clientes(
+	nome, tipo_logradouro, logradouro, numero, bairro, cidade, estado
+) VALUES
+	("João da Silva", "Rua", "XV de Novembro", "1000", "Centro", "Blumenau", "SC"),
+	("Neide Carvalho", "Praça", "da Liberdade", "12", "Liberdade", "São Paulo", "SP"),
+	("Maria Souza", "Rua", "dos Bandeirantes", "240", "Centro", "Pomerode", "SC");
+/*
+Após isso, criamos uma outra tabela para armazenar os dados
+de telefone dos clientes, criando assim um relacionamento
+onde vamos poder associar telefones a um cliente
+*/
+
+CREATE TABLE IF NOT EXISTS tb_telefones(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    cliente_id INT NOT NULL,
+    telefone VARCHAR(20) NOT NULL,
+    
+    FOREIGN KEY (cliente_id) REFERENCES tb_clientes(id)
+);
+
+/* Inserindo os dados de telefone dos clientes */
+
+INSERT INTO tb_telefones(cliente_id, telefone) VALUES
+	(1, "47957323907"),
+    (2, "11956283098"),
+    (2, "11972633312"),
+    (3, "47989878531");
