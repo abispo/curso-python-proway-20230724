@@ -65,3 +65,13 @@ INSERT INTO tb_controle(servico_id, total_horas) VALUES
     (2, 150),
     (3, 30),
     (4, 80);
+
+/*
+Verificar qual o valor que iremos receber por serviço
+*/
+
+SELECT a.id, b.nome, b.valor_hora, a.total_horas,
+b.valor_hora * a.total_horas as "valor a receber"
+FROM tb_controle a
+INNER JOIN tb_servicos b
+ON a.servico_id = b.id;
