@@ -1,0 +1,54 @@
+
+
+tb_usuarios
+1   alessandro@proway   123
+
+tb_perfis
+1   alessandro  Bispo   03/05/2001
+1   sfosdfksod  dfoskf  33042
+
+tb_postagens
+id  perfil_id   titulo      texto
+1   1           Python      python é legal
+    #python #proway #ti #database
+
+2   1           Golang      Golang é rápido
+    #proway #ti
+3   2           HTML        sdfs
+
+1 Perfil    :   1 Postagem
+1 Perfil    :   N Postagem (inclusive nenhuma)
+
+1 Postagem  :   1 Perfil
+1 Postagem  :   Nao
+
+-----------------------
+
+1 Postagem  :   1 Categoria
+1 Postagem  :   N Categoria (inclusive nenhuma)
+
+1 Categoria :   1 Postagem
+1 Categoria :   N Postagem
+
+Muitos para muitos (N:N)
+
+Nesse caso, temos que criar uma tabela associativa, que fará
+a ligação entre as postagens e as categorias
+
+tb_postagens: [1, 2, 3, 4]
+tb_categorias: [1, 2, 3, 4, 5, 6, 7, 8]
+
+1 python
+2 proway
+3 ti
+4 database
+
+tb_postagens_categorias
+id_postagem     id_categoria
+1               1
+1               2
+1               3
+1               4
+2               2
+2               3
+1               2
