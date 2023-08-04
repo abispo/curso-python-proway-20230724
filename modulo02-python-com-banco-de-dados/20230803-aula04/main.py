@@ -3,6 +3,7 @@ Módulo principal
 
 """
 
+from mensagens import INFO_USUARIO
 from usuarios import criar_usuario, buscar_usuarios
 
 if __name__ == "__main__":
@@ -45,13 +46,12 @@ ESCOLHA UMA DAS OPÇÕES ABAIXO
                 usuarios = buscar_usuarios(quantidade)
 
                 for usuario in usuarios:
-                    saida = """
-ID: {}
-Nome: {}
-Sobrenome: {}
-Email: {}
-Data de Nascimento: {}
-----------------------------------------------------------
-""".format(*usuario)
                     
-                    print(saida)
+                    # O format aceita uma quantidade arbitrária de argumentos,
+                    # desde que essa quantidade seja igual as marcações '{}' na
+                    # string. Podemos utilizar a sintaxe de asterisco para
+                    # "desempacotar" os valores da tupla no método format, ou seja,
+                    # vamos passar todos os valores da tupla no método por posição.
+                    # format(1, "joão", "da silva", etc...)
+                    
+                    print(INFO_USUARIO.format(*usuario))

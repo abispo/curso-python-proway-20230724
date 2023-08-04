@@ -48,7 +48,7 @@ def criar_perfil_usuario(usuario_id, nome, sobrenome, data_de_nascimento):
 def buscar_usuarios(quantidade):
 
     sql = """
-    SELECT tu.id, tp.nome, tp.sobrenome, tu.email, tp.data_de_nascimento
+    SELECT tu.id, tp.nome, tp.sobrenome, tu.email, strftime('%d/%m/%Y', tp.data_de_nascimento)
     FROM tb_usuarios tu
     INNER JOIN tb_perfis tp
     ON tu.id = tp.id;
@@ -60,12 +60,17 @@ def buscar_usuarios(quantidade):
 
     match quantidade:
         case 0:
+            # fetchall() retorna uma lista de tuplas, com os dados da consulta
+            # Se a consulta não retornar dados, a lista será vazia
             return consulta.fetchall()
         
         case 1:
-            return consulta.fetchone()
+            # fetchone() retorna a próxima linha do resultado. Se a consulta
+            # não retornar dados, é retornado None
+            return [consulta.fetchone()]
         
         case 2:
+            # fetchmany() possui o mesmo comportamento de retorno de fetchall()
             return consulta.fetchmany(quantidade)
         
         case _:
