@@ -3,7 +3,7 @@ Módulo principal
 
 """
 
-from usuarios import criar_usuario
+from usuarios import criar_usuario, buscar_usuarios
 
 if __name__ == "__main__":
 
@@ -38,4 +38,20 @@ ESCOLHA UMA DAS OPÇÕES ABAIXO
                 criar_usuario(email, senha, nome, sobrenome, data_nasc)
 
             case 2:
-                pass
+                texto = "Informe a quantidade de registros (0 para todos, 1 para 1 ou maior do que 1 para mais): "
+
+                quantidade = int(input(texto))
+
+                usuarios = buscar_usuarios(quantidade)
+
+                for usuario in usuarios:
+                    saida = """
+ID: {}
+Nome: {}
+Sobrenome: {}
+Email: {}
+Data de Nascimento: {}
+----------------------------------------------------------
+""".format(*usuario)
+                    
+                    print(saida)
