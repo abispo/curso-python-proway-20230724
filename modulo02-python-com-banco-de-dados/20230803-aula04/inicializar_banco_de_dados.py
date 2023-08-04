@@ -72,3 +72,19 @@ if __name__ == "__main__":
     """
 
     conexao.execute(sql)
+
+    # Criar a tabela associativa tb_postagens_categorias
+    sql = """
+    CREATE TABLE IF NOT EXISTS tb_postagens_categorias(
+        id_postagem INTEGER NOT NULL,
+        id_categoria INTEGER NOT NULL,
+
+        PRIMARY KEY(id_postagem, id_categoria),
+
+        FOREIGN KEY(id_postagem) REFERENCES tb_postagens(id),
+        FOREIGN KEY(id_categoria) REFERENCES tb_categorias(id)
+    );
+
+    """
+
+    conexao.execute(sql)
