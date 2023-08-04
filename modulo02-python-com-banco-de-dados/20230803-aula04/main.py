@@ -15,6 +15,8 @@ ESCOLHA UMA DAS OPÇÕES ABAIXO
 0 - SAIR
 1 - CADASTRAR USUARIO
 2 - VISUALIZAR USUARIOS
+3 - ATUALIZAR DADOS DE USUÁRIO
+4 - REMOVER USUÁRIO
 
 """
 
@@ -55,3 +57,12 @@ ESCOLHA UMA DAS OPÇÕES ABAIXO
                     # format(1, "joão", "da silva", etc...)
                     
                     print(INFO_USUARIO.format(*usuario))
+
+            case 3:
+                print("IMPLEMENTAR")
+
+            case 4:
+                print("IMPLEMENTAR")
+
+            case _:
+                print("OPÇÃO DESCONHECIDA")
