@@ -6,7 +6,15 @@ from datetime import datetime
 from database import Base
 
 # Importação dos tipos de dados das colunas
-from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Text
+from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Text, Table
+
+# Abaixo estamos criando a tabela associativa da relação N:N entre tb_posts e tb_tags
+# tb_posts -> postagens, tb_tags -> categorias
+posts_tags = Table(
+    "tb_posts_tags", Base.metadata,
+    Column("post_id", Integer, ForeignKey("tb_posts.id"), primary_key=True),
+    Column("tag_id", Integer, ForeignKey("tb_tags.id"), primary_key=True)
+)
 
 
 # Todas as classes que quisermos que sejam models, devem OBRIGATORIAMENTE herdar da classe Base
@@ -45,3 +53,11 @@ class Post(Base):
     title = Column(String(200), nullable=False)
     content = Column(Text, nullable=False)
     created_at = Column(DateTime, default=datetime.now)
+
+
+class Tag(Base):
+    
+    __tablename__ = "tb_tags"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(100), nullable=False)
