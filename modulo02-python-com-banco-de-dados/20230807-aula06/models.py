@@ -8,6 +8,8 @@ from database import Base
 # Importação dos tipos de dados das colunas
 from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Text, Table
 
+# from sqlalchemy.orm import relationship
+
 # Abaixo estamos criando a tabela associativa da relação N:N entre tb_posts e tb_tags
 # tb_posts -> postagens, tb_tags -> categorias
 posts_tags = Table(
@@ -33,6 +35,8 @@ class User(Base):
     email = Column(String(100), nullable=False)
     password = Column(String(100), nullable=False)
 
+    # profile = relationship("Profile", back_populates="user", uselist=False)
+
 
 class Profile(Base):
 
@@ -42,6 +46,8 @@ class Profile(Base):
 
     first_name = Column(String(100), nullable=False)
     last_name = Column(String(100), nullable=False)
+
+    # user = relationship("User", back_populates="profile", uselist=False)
 
 
 class Post(Base):

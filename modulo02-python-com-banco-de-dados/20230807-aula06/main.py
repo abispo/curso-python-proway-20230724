@@ -1,9 +1,9 @@
 # main.py
 
 from database import engine, Base
-from messages import MAIN_MENU
+from messages import MAIN_MENU, USER_INFO
 from models import User, Profile, Post
-from users import list_users, create_user
+from users import list_users, create_user, get_profile_by_id
 
 
 if __name__ == "__main__":
@@ -36,6 +36,13 @@ if __name__ == "__main__":
 
                 if len(users) == 0:
                     print("Não existem usuários cadastrados.")
+
+                else:
+                    for user in users:
+                        profile = get_profile_by_id(user.id)
+                        print(USER_INFO.format(
+                            user.id, profile.first_name, profile.last_name, user.email
+                        ))
 
             case 3:
                 pass

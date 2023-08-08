@@ -32,3 +32,10 @@ def create_profile(user, first_name, last_name):
     session.commit()
 
     return profile
+
+
+def get_profile_by_id(id):
+    
+    profile = session.query(Profile).get(id)
+
+    return profile
