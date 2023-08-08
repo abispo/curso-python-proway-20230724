@@ -33,9 +33,17 @@ def create_profile(user, first_name, last_name):
 
     return profile
 
+def update_user(id, email, password, first_name, last_name):
 
-def get_profile_by_id(id):
-    
-    profile = session.query(Profile).get(id)
+    user = session.query(User).get(id)
 
-    return profile
+    user.email = email if email else user.email
+    user.password = password if password else user.password
+    user.profile.first_name = first_name if first_name else user.profile.first_name
+    user.profile.last_name = last_name if last_name else user.profile.last_name
+
+    session.add(user)
+
+    session.commit()
+
+    return user
