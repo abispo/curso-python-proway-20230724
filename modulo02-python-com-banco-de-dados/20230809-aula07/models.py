@@ -34,6 +34,7 @@ class User(Base):
     # email VARCHAR(100) NOT NULL
     email = Column(String(100), nullable=False)
     password = Column(String(100), nullable=False)
+    created_at = Column(DateTime, default=datetime.now)
 
     profile = relationship("Profile", back_populates="user", uselist=False)
 
@@ -46,6 +47,7 @@ class Profile(Base):
 
     first_name = Column(String(100), nullable=False)
     last_name = Column(String(100), nullable=False)
+    birth_date = Column(DateTime, nullable=True)
 
     user = relationship("User", back_populates="profile", uselist=False)
 
@@ -67,3 +69,13 @@ class Tag(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(100), nullable=False)
+
+
+class Comment(Base):
+
+    __tablename__ = "tb_comments"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    profile_id = Column(Integer, ForeignKey("tb_profiles.id"), nullable=False)
+    post_id = Column(Integer, ForeignKey("tb_posts.id"), nullable=False)
+    text = Column(Text, nullable=False)
