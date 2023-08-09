@@ -8,8 +8,6 @@ from users import list_users, create_user, update_user
 
 if __name__ == "__main__":
 
-    Base.metadata.create_all(engine)
-
     while True:
 
         print(MAIN_MENU)

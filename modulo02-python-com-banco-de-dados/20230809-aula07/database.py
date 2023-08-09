@@ -11,7 +11,8 @@ from sqlalchemy.orm import sessionmaker
 
 # String de conexão ao banco de dados
 # Aqui é onde definimos o tipo de banco, as credenciais de acesso, servidor, etc...
-connection_string = "sqlite:///db.sqlite3"
+# connection_string = "sqlite:///db.sqlite3"
+connection_string = "mysql+pymysql://root:admin@localhost:3306/modulo02_python"
 
 # A função create_engine retorna um objeto que representa a conexão com o banco de dados
 # (semelhando ao conexao.connect())
