@@ -50,6 +50,7 @@ class Profile(Base):
     birth_date = Column(DateTime, nullable=True)
 
     user = relationship("User", back_populates="profile", uselist=False)
+    posts = relationship("Post", back_populates="profile", uselist=True)
 
 
 class Post(Base):
@@ -62,6 +63,9 @@ class Post(Base):
     content = Column(Text, nullable=False)
     created_at = Column(DateTime, default=datetime.now)
 
+    profile = relationship("User", back_populates="posts", uselist=False)
+    tags = relationship("Tag", back_populates="posts", secondary=posts_tags)
+
 
 class Tag(Base):
     
@@ -69,6 +73,8 @@ class Tag(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(100), nullable=False)
+
+    posts = relationship("Post", back_populates="tags", secondary=posts_tags)
 
 
 class Comment(Base):
