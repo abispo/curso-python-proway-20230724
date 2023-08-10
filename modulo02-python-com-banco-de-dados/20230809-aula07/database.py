@@ -1,5 +1,9 @@
 # database.py
 
+import os
+
+from dotenv import load_dotenv
+
 # create_engine é a função utilizada para criar uma conexão com o banco de dados
 from sqlalchemy import create_engine
 
@@ -9,10 +13,12 @@ from sqlalchemy.ext.declarative import declarative_base
 # sessionmaker cria a sessão de acesso ao banco de dados. Podemos ter várias sessões abertas
 from sqlalchemy.orm import sessionmaker
 
+load_dotenv()
+
 # String de conexão ao banco de dados
 # Aqui é onde definimos o tipo de banco, as credenciais de acesso, servidor, etc...
 # connection_string = "sqlite:///db.sqlite3"
-connection_string = "mysql+pymysql://root:admin@localhost:3306/modulo02_python"
+connection_string = os.getenv("CONNECTION_STRING")
 
 # A função create_engine retorna um objeto que representa a conexão com o banco de dados
 # (semelhando ao conexao.connect())
