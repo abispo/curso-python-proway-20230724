@@ -4,7 +4,10 @@ from polls.models import Choice, Question
 
 def index(request):
     
+    # SELECT COUNT(*) from polls_question
     questions_count = Question.objects.count()
+
+    # SELECT * FROM polls_choice
     choices_count = len(Choice.objects.all())
 
     context = {
