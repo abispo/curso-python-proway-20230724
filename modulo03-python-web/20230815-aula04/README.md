@@ -5,9 +5,9 @@
 
 * Dentro do pacote estatisticas, criar o arquivo urls.py
 
-* A rota desse pacote será /statistics
-* No arquivo views do pacote estatisticas, criar a funçao index
-    * Essa função index irá renderizar um template (statistics.html) com 2 informações:
+* A rota desse pacote será /estatisticas
+* No arquivo views.py do pacote estatisticas, criar a funçao index
+    * Essa função index irá renderizar um template (estatisticas.html) com 2 informações:
         * A quantidade de perguntas cadastradas
         * A quantidade de opções cadastradas
     * Essas informações serão trazidas do banco de dados
