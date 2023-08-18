@@ -2,34 +2,55 @@
 
 {% block content %}
 
-    <div class="row d-flex justify-content-center">
-        {% if form.errors %}
-            <div class="alert alert-warning alert-dismissible fade show text-center col-md-12" role="alert">
-                {% for title, message in form.errors.items %}
-                    <p>{{ title }}: <strong>{{ message }}</strong></p>
-                {% endfor %}
+    {% if form.errors %}
+        <div class="row">
+            <div class="alert alert-warning alert-dismissible fade show text-center col" role="alert">
+                <ul class="list-unstyled">
+                    {% for field_name, error_list in form.errors.items %}
+                        {% for error in error_list %}
+                            <li><strong>{{ field_name }}</strong>: {{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+
+                </ul>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
             </div>
-        {% endif %}
-            <form action="{% url 'login' %}" class="row g-2" method="POST">
+        </div>
+    {% endif %}
 
-                {% csrf_token %}
-    
-                <div class="col-md-12">
-                    <input type="text" name="username" id="username" class="form-control" placeholder="Informe o seu usuário">
-                </div>
-                <div class="col-md-12">
-                    <input type="text" name="password" id="password" class="form-control" placeholder="Informe a sua senha">
-                </div>
-                <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary">Enviar</button>
-                </div>
-            </form>
-            <div class="row">
-                <div class="col-md">
-                    <a href="#">Criar nova conta</a>
-                </div>
+    <form action="{% url 'login' %}" class="mt-5 pt-5" method="POST">
+        {% csrf_token %}
+
+        <div class="row d-flex justify-content-center mb-2">
+            <div class="form-floating col-md-3">
+                <input type="email" name="username" id="username" class="form-control" placeholder="user@email.com">
+                <label for="username">Informe o e-mail</label>
             </div>
+        </div>
+        <div class="row d-flex justify-content-center mb-2">
+            <div class="form-floating col-md-3">
+                <input type="password" name="password" id="password" class="form-control" placeholder="123456">
+                <label for="password">Informe a senha</label>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center my-3">
+            <div class="col-md-3 d-grid">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="row d-flex justify-content-center mb-3">
+        <div class="col-md-2 text-center">
+            <a href="#">Esqueci a senha</a>
+        </div>
+    </div>
+
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-2 text-center">
+            <a href="#" class="btn btn-success">Criar uma nova conta</a>
+        </div>
+
     </div>
 
 {% endblock content %}
