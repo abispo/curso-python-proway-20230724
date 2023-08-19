@@ -44,3 +44,13 @@ def pre_registro(request):
 
 def envio_email_pre_registro(request):
     return render(request, "registro/envio_email_pre_registro.html")
+
+
+def confirmar_cadastro(request):
+    try:
+        pre_registro = PreRegistro.objects.get(uuid=request.GET.get("id"))
+
+        return render(request, "registro/registro.html", {"pre_registro": pre_registro})
+
+    except PreRegistro.DoesNotExist:
+        return render(request, "registro/falha_confirmacao_cadastro.html", {"erro": "Token de confirmação inexistente"})
