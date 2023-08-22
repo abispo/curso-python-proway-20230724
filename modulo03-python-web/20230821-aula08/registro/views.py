@@ -1,6 +1,8 @@
+from django.conf import settings
 from django.contrib.auth.models import User
-from django.shortcuts import redirect
-from django.shortcuts import render
+from django.core.exceptions import ValidationError
+from django.shortcuts import redirect, render
+from django.utils import timezone
 
 from registro.forms import PreRegistroForm
 from registro.models import PreRegistro
@@ -48,9 +50,28 @@ def envio_email_pre_registro(request):
 
 def confirmar_cadastro(request):
     try:
+        # Pegando os dados via query string
+        # SELECT * FROM tb_pre_registro WHERE uuid = ?
         pre_registro = PreRegistro.objects.get(uuid=request.GET.get("id"))
+
+        error = None
+
+        if not pre_registro.valido:
+            error = "O token de confirmação já foi utilizado."
+
+        if (timezone.now() - pre_registro.data_hora).total_seconds() > settings.PRE_REGISTRO_TIME_LIMIT:
+            error = "O token expirou. Refaça o pré-registro"
+            pre_registro.valido = False
+            pre_registro.save()
+
+        if error:
+            return render(
+                request,
+                "registro/falha_confirmacao_cadastro.html",
+                {"error": error}
+            )
 
         return render(request, "registro/registro.html", {"pre_registro": pre_registro})
 
-    except PreRegistro.DoesNotExist:
-        return render(request, "registro/falha_confirmacao_cadastro.html", {"erro": "Token de confirmação inexistente"})
+    except (PreRegistro.DoesNotExist, ValidationError):
+        return render(request, "registro/falha_confirmacao_cadastro.html", {"error": "Token de confirmação inexistente"})
