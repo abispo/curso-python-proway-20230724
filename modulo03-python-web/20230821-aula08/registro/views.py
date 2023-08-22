@@ -7,6 +7,7 @@ from django.utils import timezone
 from registro.forms import PreRegistroForm
 from registro.models import PreRegistro
 from registro.utils import enviar_email
+from registro.validators import dados_preenchidos
 
 
 def pre_registro(request):
@@ -50,28 +51,44 @@ def envio_email_pre_registro(request):
 
 def confirmar_cadastro(request):
     try:
-        # Pegando os dados via query string
-        # SELECT * FROM tb_pre_registro WHERE uuid = ?
-        pre_registro = PreRegistro.objects.get(uuid=request.GET.get("id"))
 
-        error = None
+        if request.method == "GET":
 
-        if not pre_registro.valido:
-            error = "O token de confirmação já foi utilizado."
+            # Pegando os dados via query string
+            # SELECT * FROM tb_pre_registro WHERE uuid = ?
+            pre_registro = PreRegistro.objects.get(uuid=request.GET.get("id"))
 
-        if (timezone.now() - pre_registro.data_hora).total_seconds() > settings.PRE_REGISTRO_TIME_LIMIT:
-            error = "O token expirou. Refaça o pré-registro"
-            pre_registro.valido = False
-            pre_registro.save()
+            error = None
 
-        if error:
-            return render(
-                request,
-                "registro/falha_confirmacao_cadastro.html",
-                {"error": error}
-            )
+            if not pre_registro.valido:
+                error = "O token de confirmação já foi utilizado."
 
-        return render(request, "registro/registro.html", {"pre_registro": pre_registro})
+            if (timezone.now() - pre_registro.data_hora).total_seconds() > settings.PRE_REGISTRO_TIME_LIMIT:
+                error = "O token expirou. Refaça o pré-registro"
+                pre_registro.valido = False
+                pre_registro.save()
+
+            if error:
+                return render(
+                    request,
+                    "registro/falha_confirmacao_cadastro.html",
+                    {"error": error}
+                )
+
+            return render(request, "registro/registro.html", {"pre_registro": pre_registro})
+        
+        elif request.method == "POST":
+
+            username = request.POST["username"]
+            primeiro_nome = request.POST["first_name"]
+            senha = request.POST["password1"]
+            confirmacao_senha = request.POST["password2"]
+            pre_registro_uuid = request.POST["pre_registro_uuid"]
+
+            error = None
+
+            if not dados_preenchidos(username, primeiro_nome, senha, confirmacao_senha, pre_registro_uuid):
+                error = "Você deve preencher todos os campos do formulário"
 
     except (PreRegistro.DoesNotExist, ValidationError):
         return render(request, "registro/falha_confirmacao_cadastro.html", {"error": "Token de confirmação inexistente"})
