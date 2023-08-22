@@ -7,7 +7,7 @@ from django.utils import timezone
 from registro.forms import PreRegistroForm
 from registro.models import PreRegistro
 from registro.utils import enviar_email
-from registro.validators import dados_preenchidos, username_ou_email_ja_existem
+from registro.validators import dados_preenchidos, username_ou_email_ja_existem, senhas_conferem
 
 
 def pre_registro(request):
@@ -86,6 +86,8 @@ def confirmar_cadastro(request):
             confirmacao_senha = request.POST["password2"]
             pre_registro_uuid = request.POST["pre_registro_uuid"]
 
+            pre_registro = PreRegistro.objects.get(uuid=pre_registro_uuid)
+
             error = None
 
             if not dados_preenchidos(username, primeiro_nome, senha, confirmacao_senha, pre_registro_uuid):
@@ -94,8 +96,10 @@ def confirmar_cadastro(request):
             if username_ou_email_ja_existem(username, email):
                 error = "Existe algum problema com o seu cadastro. Verifique se o email ou o username já não existem."
 
+            if not senhas_conferem(senha, confirmacao_senha):
+                error = "A senha é diferente da confirmação de senha"
+
             if error:
-                pre_registro = PreRegistro.objects.get(uuid=pre_registro_uuid)
                 return render(
                     request,
                     "registro/registro.html",
@@ -104,6 +108,18 @@ def confirmar_cadastro(request):
                         "pre_registro": pre_registro
                     }
                 )
+            
+            User.objects.create_user(
+                username=username,
+                email=email,
+                password=senha,
+                first_name=primeiro_nome
+            )
+
+            pre_registro.valido = False
+            pre_registro.save()
+
+            return redirect("registro:cadastro-finalizado")
 
     except (PreRegistro.DoesNotExist, ValidationError):
         return render(request, "registro/falha_confirmacao_cadastro.html", {"error": "Token de confirmação inexistente"})
