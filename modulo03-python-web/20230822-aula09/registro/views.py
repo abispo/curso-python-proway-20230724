@@ -119,7 +119,11 @@ def confirmar_cadastro(request):
             pre_registro.valido = False
             pre_registro.save()
 
-            return redirect("registro:cadastro-finalizado")
+            return redirect("registro:cadastro_finalizado")
 
     except (PreRegistro.DoesNotExist, ValidationError):
         return render(request, "registro/falha_confirmacao_cadastro.html", {"error": "Token de confirmação inexistente"})
+
+
+def cadastro_finalizado(request):
+    return render(request, "registro/cadastro_finalizado.html")
