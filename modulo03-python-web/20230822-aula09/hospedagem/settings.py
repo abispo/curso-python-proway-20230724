@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
 
     'registro.apps.RegistroConfig',
+    'core.apps.CoreConfig',
 ]
 
 MIDDLEWARE = [
@@ -144,3 +145,5 @@ INTERNAL_IPS = [
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 PRE_REGISTRO_TIME_LIMIT = 86400
+
+LOGIN_REDIRECT_URL = "/hospedagem"
