@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if error %}
+        <div class="row">
+            <div class="alert alert-warning text-center col" role="alert">
+                <p>{{ error }}</p>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}

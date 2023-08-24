@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if error %}
+        <div class="row">
+            <div class="alert alert-warning alert-dismissible fade show text-center col" role="alert">
+                <p>{{ error }}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row d-flex justify-content-center my-2">
+        <div class="col-md-6 text-center">
+            <p>Finalize o seu cadastro.</p>
+        </div>
+    </div>
+    
+    <form action="" class="mt-3" method="POST">
+        {% comment %}
+            Obrigatoriamente temos que informar o comando csrf_token quando criarmos um formulário
+            HTML que utiliza o método POST
+        {% endcomment %}
+            
+        {% csrf_token %}
+        
+        <div class="row d-flex justify-content-center mb-2">
+            <div class="col-md-6 form-floating">
+                <input
+                    type="text"
+                    name="username"
+                    id="username"
+                    class="form-control"
+                    placeholder="Informe o seu username"
+                    required
+                >
+                <label for="username" class="form-label">Informe o seu username</label>
+            </div>
+        </div>
+
+        <div class="row d-flex justify-content-center mb-2">
+            <div class="col-md-6 form-floating">
+                <input type="email" name="email" id="email" class="form-control" value="{{ pre_registro.email }}" disabled>
+            </div>
+        </div>
+
+        <input type="hidden" name="user_email" value="{{ pre_registro.email }}">
+
+        <div class="row d-flex justify-content-center mb-2">
+            <div class="col-md-6 form-floating">
+                <input
+                    type="text"
+                    name="first_name"
+                    id="first_name"
+                    class="form-control"
+                    placeholder="Informe o seu primeiro nome"
+                    required
+                >
+                <label for="first_name" class="form-label">Informe o seu primeiro nome</label>
+            </div>
+        </div>
+
+        <div class="row d-flex justify-content-center mb-2">
+            <div class="col-md-6 form-floating">
+                <input
+                    type="password"
+                    name="password1"
+                    id="password1"
+                    class="form-control"
+                    placeholder="Informe a sua senha"
+                    required
+                >
+                <label for="password1" class="form-label">Informe a senha</label>
+            </div>
+        </div>
+
+        <div class="row d-flex justify-content-center mb-2">
+            <div class="col-md-6 form-floating">
+                <input
+                    type="password"
+                    name="password2"
+                    id="password2"
+                    class="form-control"
+                    placeholder="Confirme a sua senha"
+                    required
+                >
+                <label for="password2" class="form-label">Confirme a sua senha</label>
+            </div>
+        </div>
+
+        <input type="hidden" name="pre_registro_uuid" value="{{ pre_registro.uuid }}">
+
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6 d-grid">
+                <input type="submit" value="Cadastrar" class="btn btn-primary">
+            </div>
+        </div>
+    </form>
+{% endblock content %}
