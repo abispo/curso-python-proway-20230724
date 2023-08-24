@@ -48,6 +48,8 @@ INSTALLED_APPS = [
 
     'registro.apps.RegistroConfig',
     'core.apps.CoreConfig',
+    'unidades.apps.UnidadesConfig',
+    'reservas.apps.ReservasConfig',
 ]
 
 MIDDLEWARE = [
