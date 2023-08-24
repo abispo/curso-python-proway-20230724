@@ -9,6 +9,11 @@
   <body>
     
     <div class="container">
+
+        {% if user.is_authenticated %}
+          {% include 'core/menu.html' %}
+        {% endif %}
+
         {% block content %}{% endblock content %}
     </div>
 
