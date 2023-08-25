@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if form.errors %}
+        <div class="row">
+            <div class="alert alert-warning alert-dismissible fade show text-center col" role="alert">
+                <ul class="list-unstyled">
+                    {% for field_name, error in form.errors.items %}
+                        <li><strong>{{ field_name }}</strong>: {{ error }}</li>
+                    {% endfor %}
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row d-flex justify-content-center my-2">
+        <div class="col-md-6 text-center">
+            <p>Será enviado um e-mail para a sua caixa de entrada para prosseguimento do cadastro.</p>
+        </div>
+    </div>
+    
+    <form action="" class="mt-3" method="POST">
+        {% comment %}
+            Obrigatoriamente temos que informar o comando csrf_token quando criarmos um formulário
+            HTML que utiliza o método POST
+        {% endcomment %}
+            
+        {% csrf_token %}
+        
+        <div class="row d-flex justify-content-center mb-2">
+            <div class="col-md-6 form-floating">
+                {{ form.email }}
+                <label for="email" class="form-label">Informe o seu e-mail</label>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6 d-grid">
+                <input type="submit" value="Cadastrar" class="btn btn-primary">
+            </div>
+        </div>
+    </form>
+{% endblock content %}
