@@ -13,3 +13,6 @@ class Reserva(models.Model):
 
     class Meta:
         db_table = "tb_reservas"
+
+    def __str__(self):
+        return f"{self.usuario.first_name} ({self.unidade.nome})"

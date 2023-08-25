@@ -10,4 +10,14 @@ def index(request):
 
 @login_required
 def perfil_hospede(request):
-    return render(request, "core/perfil_hospede.html")
+
+    hospede = request.user
+    numero_de_hospedagens = hospede.reserva_set.count()
+
+    return render(
+        request,
+        "core/perfil_hospede.html",
+        {
+            "numero_de_hospedagens": numero_de_hospedagens
+        }
+    )

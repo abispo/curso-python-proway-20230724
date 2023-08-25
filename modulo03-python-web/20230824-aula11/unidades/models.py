@@ -7,6 +7,9 @@ class TipoUnidade(models.Model):
     class Meta:
         db_table = "tb_tipos_unidade"
 
+    def __str__(self):
+        return self.nome
+
 
 class Unidade(models.Model):
     nome = models.CharField(max_length=200)
@@ -17,3 +20,6 @@ class Unidade(models.Model):
 
     class Meta:
         db_table = "tb_unidades"
+
+    def __str__(self):
+        return self.nome
