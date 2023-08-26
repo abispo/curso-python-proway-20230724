@@ -14,5 +14,15 @@ class Reserva(models.Model):
     class Meta:
         db_table = "tb_reservas"
 
+        # Podemos criar permissões personalizadas dentro do Django.
+        # Para isso, utilizamos a lista de tuplas permissions
+        # Que deve ficar dentro do class Meta
+        permissions = [
+            # Cada tupla deve ter 2 valores: O primeiro é o nome da permissão, e o segundo
+            # é a descrição
+            # Temos que fazer o mesmo processo que fazemos quanto atualizamos uma model
+            ("pode_reservar_pelo_site", "Permissão que autoriza o hospede a fazer a reserva pelo site.")
+        ]
+
     def __str__(self):
         return f"{self.usuario.first_name} ({self.unidade.nome})"

@@ -14,8 +14,22 @@
                     <li class="list-group-item">{{ user.email }}</li>
                 </ul>
                 <div class="card-body">
-                    <p>Você já se hospedou conosco {{ numero_de_hospedagens }} vez{{ numero_de_hospedagens|pluralize:'es' }}.</p>
-                    <p><a href="#" class="card-link">Visualizar Hospedagens</a></p>
+                    
+                    {% if numero_de_hospedagens > 0 %}
+                        <p>Você já se hospedou conosco {{ numero_de_hospedagens }} vez{{ numero_de_hospedagens|pluralize:'es' }}.</p>
+                        <p><a href="{% url 'reservas:reservas_por_hospede' user.id %}" class="card-link">Visualizar Hospedagens</a></p>
+
+                    {% else %}
+                        <p>Você nunca se hospedou conosco.</p>
+                        
+                        {% if perms.reservas.pode_reservar_pelo_site %}
+                            <p><a href="#">Hospede-se agora!</a></p>
+                        {% else %}
+                            <p>Entre em contato no telefone 2345678 para fazer sua reserva.</p>
+                        {% endif %}
+                        
+                    {% endif %}
+
                 </div>
             </div>
             
